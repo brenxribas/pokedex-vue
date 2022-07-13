@@ -1,24 +1,17 @@
-# pokedex-vue
+# Pokédex
+Landing page com dialogs que exibem informações do Pokémon selecionado.
 
-## Project setup
-```
-npm install
-```
+## Scripts
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+No diretório do projeto, instale as dependências: 
+#### `npm install`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Execução do projeto:
+#### `npm run serve`
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Tecnologias Utilizadas
+<p align="left">
+<a href="https://vuejs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vuejs-colored.svg" width="36" height="36" alt="Vue" /></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a>
+</p>
