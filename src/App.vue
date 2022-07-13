@@ -1,6 +1,3 @@
-// fazer paginação
-// armazenar pokeapi no localstorage
-// pesquisar sobre gerenciadores de estado
 
 <template>
   <v-app>
