@@ -4,30 +4,50 @@
 
 <template>
   <v-app>
-    <NavbarVue />
     <v-container>
-        
-        <v-row class="mx-0 d-flex justify-center">
-          <v-col
-            cols="2"
-            v-for="pokemon in filtered_pokemons"
-            :key="pokemon.name"
-          >
-            <v-card @click="show_pokemon(get_id(pokemon))">
-              <v-container>
-                <img
-                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(
-                    pokemon
-                  )}.png`"
-                  :alt="pokemon.name"
-                  width="80%"
-                  class="ml-5"
-                />
-                <h2 class="text-center">{{ get_name(pokemon) }}</h2>
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
+      <v-row>
+        <v-container>
+          <v-img
+            :src="require('../src/assets/pokedex.png')"
+            class="my-3"
+            contain
+            height="300"
+          />
+        </v-container>
+      </v-row>
+
+      <v-col class="mx-auto" cols="3">
+        <v-text-field
+          v-model="search"
+          label="Pesquisar Pokémon"
+          placeholder="Bulbasaur..."
+          prepend-inner-icon="mdi-magnify"
+          color="red"
+          solo
+        ></v-text-field>
+      </v-col>
+
+      <v-row class="mx-0 d-flex justify-center">
+        <v-col
+          cols="2"
+          v-for="pokemon in filtered_pokemons"
+          :key="pokemon.name"
+        >
+          <v-card @click="show_pokemon(get_id(pokemon))">
+            <v-container>
+              <img
+                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(
+                  pokemon
+                )}.png`"
+                :alt="pokemon.name"
+                width="80%"
+                class="ml-5"
+              />
+              <h2 class="text-center">{{ get_name(pokemon) }}</h2>
+            </v-container>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
 
     <v-dialog v-model="show_dialog" width="800">
@@ -58,9 +78,7 @@
               <v-chip label class="ml-2"
                 ><span
                   >Peso:
-                  {{
-                    (selected_pokemon.weight * 0.45359237).toFixed(0)
-                  }}
+                  {{ (selected_pokemon.weight * 0.45359237).toFixed(0) }}
                   kg</span
                 ></v-chip
               >
@@ -95,13 +113,10 @@
 
 <script>
 import axios from "axios";
-import NavbarVue from "./components/Navbar.vue";
 
 export default {
   name: "App",
-  components: {
-    NavbarVue,
-  },
+  components: {},
 
   data() {
     return {
@@ -112,11 +127,16 @@ export default {
     };
   },
   async mounted() {
+    if(localStorage.getItem('pokemons') == null){
     await axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=151")
       .then((response) => {
         this.pokemons = response.data.results;
+        localStorage.setItem("pokemons", JSON.stringify(this.pokemons));
       });
+        }else{
+          this.pokemons = JSON.parse(localStorage.getItem("pokemons"));
+        }
   },
   methods: {
     get_id(pokemon) {
